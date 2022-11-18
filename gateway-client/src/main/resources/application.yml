@@ -1,0 +1,38 @@
+server:
+  port: 8090
+eureka:
+  instance:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  application:
+    name: gateway-client
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay=
+      routes:
+        - id: user-service
+          uri: lb://item-service
+          predicates:
+            - "Path=/api/v1/items/**"
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: my-provider
+            client-id: market-keycloak
+            client-secret: WG7nUka6Dnx6Zl6XtPq8Oar4gpfj2Pon
+            authorization_grant_type: authorization_code
+            redirect_url: "http://localhost:8090/login/oauth2/code/{registration_id}"
+            scope: openid
+        provider:
+          my-provider:
+            issuer-uri: "http://localhost:8080/realms/market-realm"
