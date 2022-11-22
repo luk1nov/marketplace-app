@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: item-service
+  cloud:
+    config:
+      uri: http://localhost:8888/config
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/market-realm
+          jwk-set-uri: http://localhost:8080/realms/market-realm/protocol/openid-connect/certs
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - busrefresh
+          - refresh
