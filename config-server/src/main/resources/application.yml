@@ -1,0 +1,35 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /config
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: git, vault
+  cloud:
+    config:
+      server:
+        vault:
+          host: 127.0.0.1
+          port: 8200
+          scheme: "http"
+          order: 1
+          kv-version: 2
+          authentication: token
+          token: hvs.A838t0m5QwbrxtUhxMhlwjxu
+        git:
+          uri: https://github.com/luk1nov/marketplace-config.git
+          skip-ssl-validation: true
+          clone-on-start: true
+          order: 2
+          default-label: master
+management:
+  health:
+    livenessstate.enable: true
+    readinessstate.enable: true
+  endpoint.health.probes.enabled: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
