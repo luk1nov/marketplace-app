@@ -1,6 +1,7 @@
 package com.lukyanov.itemservice.mapper;
 
-import com.lukyanov.itemservice.dto.ItemDto;
+import com.lukyanov.itemservice.dto.RequestItemDto;
+import com.lukyanov.itemservice.dto.ResponseItemDto;
 import com.lukyanov.itemservice.entity.Item;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -14,10 +15,9 @@ public interface ItemMapper {
 
     @Mapping(target = "categoryDto", source = "category")
     @Mapping(target = "conditionDto", source = "condition")
-    ItemDto itemToDto(Item item);
+    ResponseItemDto itemToDto(Item item);
 
-    @Mapping(target = "category", source = "categoryDto")
-    @Mapping(target = "condition", source = "conditionDto")
-    Item dtoToItem(ItemDto itemDto);
-
+    @Mapping(target = "category.name", source = "category")
+    @Mapping(target = "condition.name", source = "condition")
+    Item dtoToItem(RequestItemDto requestItemDto);
 }

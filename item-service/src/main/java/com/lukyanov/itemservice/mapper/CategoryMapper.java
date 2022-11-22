@@ -11,5 +11,5 @@ import org.mapstruct.MappingConstants;
 injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface CategoryMapper {
     CategoryDto categoryToDto(Category category);
-    Category DtoToCategory(CategoryDto categoryDto);
+    Category dtoToCategory(CategoryDto categoryDto);
 }

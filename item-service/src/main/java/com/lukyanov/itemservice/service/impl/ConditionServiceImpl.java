@@ -32,14 +32,21 @@ public class ConditionServiceImpl implements ConditionService {
 
     @Override
     public ConditionDto create(ConditionDto conditionDto) {
-        return conditionMapper.conditionToDto(conditionRepository.save(conditionMapper.DtoToCondition(conditionDto)));
+        return conditionMapper.conditionToDto(conditionRepository.save(conditionMapper.dtoToCondition(conditionDto)));
     }
 
     @Override
     public ConditionDto update(Long id, ConditionDto conditionDto) {
         findById(id);
         conditionDto.setId(id);
-        return conditionMapper.conditionToDto(conditionRepository.save(conditionMapper.DtoToCondition(conditionDto)));
+        return conditionMapper.conditionToDto(conditionRepository.save(conditionMapper.dtoToCondition(conditionDto)));
+    }
+
+    @Override
+    public ConditionDto findByName(String name) {
+        return conditionRepository.findFirstByName(name)
+                .map(conditionMapper::conditionToDto)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override

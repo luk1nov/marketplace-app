@@ -10,5 +10,5 @@ import org.mapstruct.MappingConstants;
 injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface ConditionMapper {
     ConditionDto conditionToDto(Condition condition);
-    Condition DtoToCondition(ConditionDto conditionDto);
+    Condition dtoToCondition(ConditionDto conditionDto);
 }
