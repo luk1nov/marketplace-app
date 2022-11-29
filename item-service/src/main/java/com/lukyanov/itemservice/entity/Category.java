@@ -27,7 +27,7 @@ public class Category {
     @EqualsAndHashCode.Exclude
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parentCategory")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Category> subcategories;

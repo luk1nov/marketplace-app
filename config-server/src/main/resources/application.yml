@@ -17,7 +17,7 @@ spring:
           order: 1
           kv-version: 2
           authentication: token
-          token: hvs.A838t0m5QwbrxtUhxMhlwjxu
+          token: hvs.LJnTzyMQ6MnYDQyKTUU7McEi
         git:
           uri: https://github.com/luk1nov/marketplace-config.git
           skip-ssl-validation: true

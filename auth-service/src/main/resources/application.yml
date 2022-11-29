@@ -1,0 +1,33 @@
+server:
+  port: 8081
+
+spring:
+  application.name: auth-service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: auth-service-db
+      username: anton
+      password: pwd
+      authentication-database: admin
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  jackson:
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+    serialization:
+      INDENT_OUTPUT: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+      WRITE_BIGDECIMAL_AS_PLAIN: true
+
+
+#  jackson:
+#    deserialization:
+#      FAIL_ON_IGNORED_PROPERTIES: false
+#    serialization:
+#      INDENT_OUTPUT: false
+#      WRITE_DATES_AS_TIMESTAMPS: false
+#      WRITE_BIGDECIMAL_AS_PLAIN: true

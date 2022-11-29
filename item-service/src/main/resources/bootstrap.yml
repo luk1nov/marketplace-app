@@ -8,8 +8,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/market-realm
-          jwk-set-uri: http://localhost:8080/realms/market-realm/protocol/openid-connect/certs
+          issuer-uri: http://backend-auth:8081
+#          issuer-uri: http://localhost:8080/realms/market-realm
+#          jwk-set-uri: http://localhost:8080/realms/market-realm/protocol/openid-connect/certs
 management:
   endpoints:
     web:

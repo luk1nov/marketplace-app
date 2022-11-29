@@ -28,6 +28,8 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .mvcMatchers("/**")
+                .access("hasAuthority('SCOPE_message.read')")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -36,7 +38,7 @@ public class SecurityConfig {
 //                .access("hasAuthority('SCOPE_items.read')")
 /*                .and()
                 .oauth2ResourceServer()
-                .jwt()*/;
+                .jwt();*/
         return http.build();
     }
 

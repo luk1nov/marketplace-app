@@ -19,25 +19,21 @@ spring:
         - id: item-service
           uri: lb://item-service
           predicates:
-            - "Path=/api/v1/items/**"
-#          filters:
-#            - TokenRelay=
+            Path=/api/v1/items/**
+          filters:
+            TokenRelay=
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/market-realm
-          jwk-set-uri: http://localhost:8080/realms/market-realm/protocol/openid-connect/certs
-#      client:
-#        registration:
-#          gateway:
-#            client-id: market-keycloak
-#            client-secret: WG7nUka6Dnx6Zl6XtPq8Oar4gpfj2Pon
-#            provider: keycloak
-#            authorization-grant-type: authorization_code
-#            redirect_uri: "http://localhost:8090/login/oauth2/code/{registrationId}"
-#            scope: openid
-#        provider:
-#          keycloak:
-#            issuer-uri: "http://localhost:8080/realms/market-realm"
+      client:
+        registration:
+          gateway:
+            provider: my-provider
+            client-id: gateway-client-id
+            client-secret: my-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://backend-gateway-client:8090/login/oauth2/code/{registrationId}"
+            scope: openid, message.read
+        provider:
+          my-provider:
+            issuer-uri: http://backend-auth:8081
 
