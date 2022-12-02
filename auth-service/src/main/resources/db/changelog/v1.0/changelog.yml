@@ -1,0 +1,223 @@
+databaseChangeLog:
+- changeSet:
+    id: 1669729709704-1
+    author: antos (generated)
+    changes:
+    - createSequence:
+        sequenceName: permission_seq
+- changeSet:
+    id: 1669729709704-2
+    author: antos (generated)
+    changes:
+    - createSequence:
+        sequenceName: role_seq
+- changeSet:
+    id: 1669729709704-3
+    author: antos (generated)
+    changes:
+    - createSequence:
+        sequenceName: users_seq
+- changeSet:
+    id: 1669729709704-4
+    author: antos (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: permissionsPK
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: permissions
+- changeSet:
+    id: 1669729709704-5
+    author: antos (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: role_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: permission_id
+            type: BIGINT
+        tableName: role_has_permission
+- changeSet:
+    id: 1669729709704-6
+    author: antos (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: rolesPK
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: roles
+- changeSet:
+    id: 1669729709704-7
+    author: antos (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: user_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: roles_id
+            type: BIGINT
+        tableName: user_has_role
+- changeSet:
+    id: 1669729709704-8
+    author: antos (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: usersPK
+            name: id
+            type: BIGINT
+        - column:
+            name: created
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: first_name
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: last_name
+            type: VARCHAR(255)
+        - column:
+            name: password
+            type: VARCHAR(255)
+        - column:
+            name: updated
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: username
+            type: VARCHAR(255)
+        tableName: users
+- changeSet:
+    id: 1669729709704-9
+    author: antos (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UC_PERMISSIONSNAME_COL
+        tableName: permissions
+- changeSet:
+    id: 1669729709704-10
+    author: antos (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UC_ROLESNAME_COL
+        tableName: roles
+- changeSet:
+    id: 1669729709704-11
+    author: antos (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: UC_USERSEMAIL_COL
+        tableName: users
+- changeSet:
+    id: 1669729709704-12
+    author: antos (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: username
+        constraintName: UC_USERSUSERNAME_COL
+        tableName: users
+- changeSet:
+    id: 1669729709704-13
+    author: antos (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: user_has_role
+        constraintName: FK2dl1ftxlkldulcp934i3125qo
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: users
+        validate: true
+- changeSet:
+    id: 1669729709704-14
+    author: antos (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: permission_id
+        baseTableName: role_has_permission
+        constraintName: FK4tkb5h6g9725voio02abkw8cq
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: permissions
+        validate: true
+- changeSet:
+    id: 1669729709704-15
+    author: antos (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: roles_id
+        baseTableName: user_has_role
+        constraintName: FKkb8c6ro8i7p66h72w2lsagg52
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: roles
+        validate: true
+- changeSet:
+    id: 1669729709704-16
+    author: antos (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: role_id
+        baseTableName: role_has_permission
+        constraintName: FKl5t2ucrudh92ach6bddb918kp
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: roles
+        validate: true
+
