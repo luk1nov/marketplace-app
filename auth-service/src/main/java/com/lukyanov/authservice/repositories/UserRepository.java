@@ -1,12 +1,12 @@
 package com.lukyanov.authservice.repositories;
 
 import com.lukyanov.authservice.entities.AuthUser;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends MongoRepository<AuthUser, Long> {
+public interface UserRepository extends JpaRepository<AuthUser, Long> {
     Optional<AuthUser> findByUsername(String login);
 }
