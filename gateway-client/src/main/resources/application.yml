@@ -19,7 +19,7 @@ spring:
         - id: item-service
           uri: lb://item-service
           predicates:
-            Path=/api/v1/items/**
+            Path=/api/v1/**
           filters:
             TokenRelay=
   security:

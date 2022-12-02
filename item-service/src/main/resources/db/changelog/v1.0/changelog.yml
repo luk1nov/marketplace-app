@@ -65,7 +65,7 @@ databaseChangeLog:
               primaryKey: true
               primaryKeyName: itemPK
             name: id
-            type: UUID
+            type: BIGINT
         - column:
             constraints:
               nullable: false
@@ -155,4 +155,9 @@ databaseChangeLog:
         referencedColumnNames: id
         referencedTableName: condition
         validate: true
-
+- changeSet:
+      id: 1668708880599-11
+      author: Anton (generated)
+      changes:
+          - createSequence:
+                sequenceName: item_seq

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: auth-service
+  cloud:
+    config:
+      uri: http://localhost:8888/config
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - busrefresh
+          - refresh
