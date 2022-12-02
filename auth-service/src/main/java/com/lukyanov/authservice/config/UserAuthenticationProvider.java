@@ -1,6 +1,7 @@
 package com.lukyanov.authservice.config;
 
 import com.lukyanov.authservice.entities.AuthUser;
+import com.lukyanov.authservice.entities.Role;
 import com.lukyanov.authservice.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -8,12 +9,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.nio.CharBuffer;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -43,9 +45,13 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         }
 
         AuthUser user = oUser.get();
-
+        Set<SimpleGrantedAuthority> authorities = user.getRoles().stream()
+                .map(Role::getPermissions)
+                .flatMap(Collection::stream)
+                .map(permission -> new SimpleGrantedAuthority(permission.getName()))
+                .collect(Collectors.toSet());
         if (passwordEncoder.matches(CharBuffer.wrap(password), user.getPassword())) {
-            return UsernamePasswordAuthenticationToken.authenticated(login, password, Collections.emptyList());
+            return UsernamePasswordAuthenticationToken.authenticated(login, password, authorities);
         }
 
         throw new BadCredentialsException("invalid password");
