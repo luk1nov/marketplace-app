@@ -19,5 +19,8 @@ public interface ItemMapper {
 
     @Mapping(target = "category.name", source = "category")
     @Mapping(target = "condition.name", source = "condition")
+//    @Mapping(target = "id", ignore = true)
+//    @Mapping(target = "created", ignore = true)
+//    @Mapping(target = "updated", ignore = true)
     Item dtoToItem(RequestItemDto requestItemDto);
 }

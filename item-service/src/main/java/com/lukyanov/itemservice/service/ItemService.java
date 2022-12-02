@@ -2,11 +2,8 @@ package com.lukyanov.itemservice.service;
 
 import com.lukyanov.itemservice.dto.RequestItemDto;
 import com.lukyanov.itemservice.dto.ResponseItemDto;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.UUID;
-
-public interface ItemService extends BaseService<ResponseItemDto, UUID>{
+public interface ItemService extends BaseService<ResponseItemDto, Long>{
     ResponseItemDto create(RequestItemDto t);
-    ResponseItemDto update(UUID id, RequestItemDto t);
+    ResponseItemDto update(Long id, RequestItemDto t);
 }

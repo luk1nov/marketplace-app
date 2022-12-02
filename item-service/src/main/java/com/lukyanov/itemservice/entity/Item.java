@@ -1,11 +1,12 @@
 package com.lukyanov.itemservice.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -14,17 +15,22 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_gen")
+    @SequenceGenerator(name = "item_gen", sequenceName = "item_seq", allocationSize = 1)
     @Column(name = "id", nullable = false, updatable = false)
-    private UUID id;
+    private Long id;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
     @Column(name = "created", nullable = false)
+    @CreationTimestamp
     private LocalDateTime created;
+
     @Column(name = "updated", nullable = false)
+    @UpdateTimestamp
     private LocalDateTime updated;
+
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
@@ -39,15 +45,4 @@ public class Item {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Condition condition;
-
-    @PrePersist
-    public void setCreatedAndUpdated(){
-        created = LocalDateTime.now();
-        updated = created;
-    }
-
-    @PreUpdate
-    public void setUpdated(){
-        updated = LocalDateTime.now();
-    }
 }

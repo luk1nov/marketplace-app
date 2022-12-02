@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +29,8 @@ public class ItemServiceImpl implements ItemService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public ResponseItemDto findById(UUID uuid) {
-        return itemRepository.findById(uuid).map(itemMapper::itemToDto)
+    public ResponseItemDto findById(Long id) {
+        return itemRepository.findById(id).map(itemMapper::itemToDto)
                 .orElseThrow(EntityNotFoundException::new);
     }
 
@@ -48,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ResponseItemDto update(UUID uuid, RequestItemDto requestItemDto) {
+    public ResponseItemDto update(Long id, RequestItemDto requestItemDto) {
 //        findById(uuid);
 //        requestItemDto.setId(uuid);
 //        return itemMapper.itemToDto(itemRepository.save(itemMapper.dtoToItem(requestItemDto)));
@@ -57,8 +56,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void remove(UUID uuid) {
-        itemRepository.deleteById(uuid);
+    public void remove(Long id) {
+        itemRepository.deleteById(id);
     }
 
     private Item buildItemFromRequestItem(RequestItemDto requestItemDto){
