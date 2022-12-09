@@ -1,0 +1,57 @@
+databaseChangeLog:
+- changeSet:
+    id: 1668708880599-12
+    author: Anton (generated)
+    changes:
+      - addColumn:
+          tableName: product
+          columns:
+            - column:
+                name: seller_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+      - addColumn:
+          tableName: product
+          columns:
+            - column:
+                name: status_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+- changeSet:
+    id: 1668708880599-13
+    author: Anton (generated)
+    changes:
+      - createSequence:
+          sequenceName: product_status_seq
+- changeSet:
+    id: 1668708880599-14
+    author: Anton (generated)
+    changes:
+      - createTable:
+          columns:
+            - column:
+                constraints:
+                  nullable: false
+                  primaryKey: true
+                  primaryKeyName: product_statusPK
+                name: id
+                type: BIGINT
+            - column:
+                name: status
+                type: VARCHAR(255)
+          tableName: product_status
+- changeSet:
+    id: 1668708880599-15
+    author: Anton (generated)
+    changes:
+      - addForeignKeyConstraint:
+          baseColumnNames: status_id
+          baseTableName: product
+          constraintName: product_status_fk
+          deferrable: false
+          initiallyDeferred: false
+          referencedColumnNames: id
+          referencedTableName: product_status
+          validate: true

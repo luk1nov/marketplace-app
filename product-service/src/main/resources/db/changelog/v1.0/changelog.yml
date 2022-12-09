@@ -63,7 +63,7 @@ databaseChangeLog:
             constraints:
               nullable: false
               primaryKey: true
-              primaryKeyName: itemPK
+              primaryKeyName: productPK
             name: id
             type: BIGINT
         - column:
@@ -99,7 +99,7 @@ databaseChangeLog:
               nullable: false
             name: condition_id
             type: BIGINT
-        tableName: item
+        tableName: product
 - changeSet:
     id: 1668708880599-6
     author: Anton (generated)
@@ -122,7 +122,7 @@ databaseChangeLog:
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: category_id
-        baseTableName: item
+        baseTableName: product
         constraintName: FK7k18sd20vy08yjs53gp65xyov
         deferrable: false
         initiallyDeferred: false
@@ -148,7 +148,7 @@ databaseChangeLog:
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: condition_id
-        baseTableName: item
+        baseTableName: product
         constraintName: FKlaffaihjw0im3suxfqn8q0d84
         deferrable: false
         initiallyDeferred: false
@@ -160,4 +160,4 @@ databaseChangeLog:
       author: Anton (generated)
       changes:
           - createSequence:
-                sequenceName: item_seq
+                sequenceName: product_seq
