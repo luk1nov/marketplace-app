@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'marketplace'
-include('item-service', 'eureka-server', 'gateway-client', 'config-server', 'auth-service')
+include('product-service', 'eureka-server', 'gateway-client', 'config-server', 'auth-service')

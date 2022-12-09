@@ -23,5 +23,5 @@ public class Condition {
     private String name;
 
     @OneToMany(mappedBy = "condition")
-    private Set<Item> items = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 }
