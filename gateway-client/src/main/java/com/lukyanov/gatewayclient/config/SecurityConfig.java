@@ -1,4 +1,4 @@
-package com.lukyanov.gatewayclient;
+package com.lukyanov.gatewayclient.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
