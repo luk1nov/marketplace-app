@@ -1,8 +1,6 @@
 package com.lukyanov.itemservice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,5 +20,7 @@ public class ProductStatus {
     private String status;
 
     @OneToMany(mappedBy = "status")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Product> products = new HashSet<>();
 }
