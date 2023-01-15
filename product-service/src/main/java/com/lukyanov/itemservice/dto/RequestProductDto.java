@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 
 @Data
 public class RequestProductDto {
-    private final String name;
-    private final String description;
-    private final BigDecimal price;
-    private final String category;
-    private final String condition;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Long categoryId;
+    private String condition;
 }
