@@ -1,0 +1,30 @@
+server:
+  port: 8082
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/item-service-db
+    username: postgres
+    password: 1234
+  rabbitmq:
+    port: 5672
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    config:
+      enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - busrefresh
+          - refresh
+
+product:
+  status:
+    defaultStatus: MODERATION
+
