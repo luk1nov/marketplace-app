@@ -28,9 +28,9 @@ public class AuthUser {
     @Column(nullable = false, unique = true)
     private String email;
     private String password;
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
     @CreationTimestamp
     private LocalDateTime created;
