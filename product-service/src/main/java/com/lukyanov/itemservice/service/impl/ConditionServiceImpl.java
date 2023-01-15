@@ -5,10 +5,11 @@ import com.lukyanov.itemservice.mapper.ConditionMapper;
 import com.lukyanov.itemservice.repository.ConditionRepository;
 import com.lukyanov.itemservice.service.ConditionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,10 +25,9 @@ public class ConditionServiceImpl implements ConditionService {
     }
 
     @Override
-    public List<ConditionDto> findAll() {
-        return conditionRepository.findAll().stream()
-                .map(conditionMapper::conditionToDto)
-                .toList();
+    public Page<ConditionDto> findAll(Pageable pageable) {
+        return conditionRepository.findAll(pageable)
+                .map(conditionMapper::conditionToDto);
     }
 
     @Override

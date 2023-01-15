@@ -1,9 +1,9 @@
 package com.lukyanov.itemservice.service;
 
-import com.lukyanov.itemservice.dto.CategoryDto;
+import com.lukyanov.itemservice.dto.RequestCategoryDto;
+import com.lukyanov.itemservice.dto.ResponseCategoryDto;
 
-public interface CategoryService extends BaseService<CategoryDto, Long> {
-    CategoryDto create(CategoryDto t);
-    CategoryDto update(Long id, CategoryDto t);
-    CategoryDto findByName(String name);
+public interface CategoryService extends BaseService<ResponseCategoryDto, Long> {
+    ResponseCategoryDto create(RequestCategoryDto t);
+    ResponseCategoryDto update(Long id, RequestCategoryDto t);
 }

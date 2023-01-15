@@ -3,10 +3,10 @@ package com.lukyanov.itemservice.controller;
 import com.lukyanov.itemservice.dto.ConditionDto;
 import com.lukyanov.itemservice.service.ConditionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/conditions")
@@ -15,8 +15,8 @@ public class ConditionController {
     private final ConditionService conditionService;
 
     @GetMapping
-    public List<ConditionDto> findAll(){
-        return conditionService.findAll();
+    public Page<ConditionDto> findAll(Pageable pageable){
+        return conditionService.findAll(pageable);
     }
 
     @GetMapping("/{id}")

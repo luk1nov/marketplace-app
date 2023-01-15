@@ -1,12 +1,13 @@
 package com.lukyanov.itemservice.controller;
 
-import com.lukyanov.itemservice.dto.CategoryDto;
+import com.lukyanov.itemservice.dto.RequestCategoryDto;
+import com.lukyanov.itemservice.dto.ResponseCategoryDto;
 import com.lukyanov.itemservice.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/categories")
@@ -15,23 +16,23 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public List<CategoryDto> findAll(){
-        return categoryService.findAll();
+    public Page<ResponseCategoryDto> findAll(Pageable pageable){
+        return categoryService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public CategoryDto findById(@PathVariable Long id){
+    public ResponseCategoryDto findById(@PathVariable Long id){
         return categoryService.findById(id);
     }
 
     @PostMapping
-    public CategoryDto create(@RequestBody CategoryDto categoryDto){
-        return categoryService.create(categoryDto);
+    public ResponseCategoryDto create(@RequestBody RequestCategoryDto requestCategoryDto){
+        return categoryService.create(requestCategoryDto);
     }
 
     @PutMapping("/{id}")
-    public CategoryDto update(@RequestBody CategoryDto categoryDto, @PathVariable Long id){
-        return categoryService.update(id, categoryDto);
+    public ResponseCategoryDto update(@RequestBody RequestCategoryDto requestCategoryDto, @PathVariable Long id){
+        return categoryService.update(id, requestCategoryDto);
     }
 
     @DeleteMapping("/{id}")
