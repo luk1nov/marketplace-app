@@ -16,11 +16,13 @@ import org.springframework.security.oauth2.server.authorization.client.InMemoryR
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+import java.time.Duration;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -81,6 +83,7 @@ public class SecurityConfig {
                 .redirectUri("http://backend-gateway-client:8090/authorized")
                 // acceptable scopes for the authorization
                 .scope(OidcScopes.OPENID)
+                .tokenSettings(tokenSettings())
                 .build();
         return new InMemoryRegisteredClientRepository(registeredClient);
     }
@@ -93,6 +96,16 @@ public class SecurityConfig {
         return ProviderSettings.builder()
                 .issuer("http://backend-auth:8081")
                 .build();
+    }
+
+
+    @Bean
+    public TokenSettings tokenSettings() {
+        // @formatter:off
+        return TokenSettings.builder()
+                .accessTokenTimeToLive(Duration.ofDays(1L))
+                .build();
+        // @formatter:on
     }
 
     @Bean
