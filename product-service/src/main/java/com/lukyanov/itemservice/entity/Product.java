@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_gen")
-    @SequenceGenerator(name = "item_gen", sequenceName = "item_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
     @Column(name = "name", nullable = false)
@@ -43,7 +43,7 @@ public class Product {
     private Long sellerId;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
     private ProductStatus status;
 
     @Column(name = "created", nullable = false)
