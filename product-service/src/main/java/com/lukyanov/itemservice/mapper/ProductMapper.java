@@ -13,14 +13,12 @@ uses = {ConditionMapper.class, CategoryMapper.class},
 injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface ProductMapper {
 
-    @Mapping(target = "categoryDto", source = "category")
-    @Mapping(target = "conditionDto", source = "condition")
-    ResponseProductDto itemToDto(Product product);
+    @Mapping(target = "responseCategoryDto", source = "category")
+    @Mapping(target = "condition", source = "condition.name")
+    @Mapping(target = "status", source = "status.status")
+    ResponseProductDto productToDto(Product product);
 
-    @Mapping(target = "category.name", source = "category")
+    @Mapping(target = "category.id", source = "categoryId")
     @Mapping(target = "condition.name", source = "condition")
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "created", ignore = true)
-//    @Mapping(target = "updated", ignore = true)
-    Product dtoToItem(RequestProductDto requestProductDto);
+    Product dtoToProduct(RequestProductDto requestProductDto);
 }

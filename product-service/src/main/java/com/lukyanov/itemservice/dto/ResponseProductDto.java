@@ -12,8 +12,10 @@ public class ResponseProductDto implements Serializable {
     private final String name;
     private final String description;
     private final BigDecimal price;
+    private final Long sellerId;
+    private final String status;
+    private final ResponseCategoryDto responseCategoryDto;
+    private final String condition;
     private final LocalDateTime created;
     private final LocalDateTime updated;
-    private final CategoryDto categoryDto;
-    private final ConditionDto conditionDto;
 }
