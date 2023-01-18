@@ -1,7 +1,7 @@
 package com.lukyanov.userservice.repository;
 
 import com.lukyanov.userservice.dto.UserInfoDto;
-import com.lukyanov.userservice.model.User;
+import com.lukyanov.userservice.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

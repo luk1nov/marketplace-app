@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ResponseProductDto implements Serializable {
-    private Long id;
+    private final Long id;
     private final String name;
     private final String description;
     private final BigDecimal price;
