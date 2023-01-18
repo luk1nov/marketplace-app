@@ -20,5 +20,10 @@ public interface ProductMapper {
 
     @Mapping(target = "category.id", source = "categoryId")
     @Mapping(target = "condition.name", source = "condition")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "sellerId", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
     Product dtoToProduct(RequestProductDto requestProductDto);
 }
