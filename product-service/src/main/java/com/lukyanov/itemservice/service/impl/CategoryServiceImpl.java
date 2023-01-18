@@ -2,6 +2,7 @@ package com.lukyanov.itemservice.service.impl;
 
 import com.lukyanov.itemservice.dto.RequestCategoryDto;
 import com.lukyanov.itemservice.dto.ResponseCategoryDto;
+import com.lukyanov.itemservice.entity.Category;
 import com.lukyanov.itemservice.exception.EntityModifyingException;
 import com.lukyanov.itemservice.mapper.CategoryMapper;
 import com.lukyanov.itemservice.repository.CategoryRepository;
@@ -24,19 +25,19 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public ResponseCategoryDto findById(Long id) {
         return categoryRepository.findById(id)
-                .map(categoryMapper::categoryToDto)
+                .map(categoryMapper::categoryToResponseCategoryDto)
                 .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
     public Page<ResponseCategoryDto> findAll(Pageable pageable) {
         return categoryRepository.findAll(pageable)
-                .map(categoryMapper::categoryToDto);
+                .map(categoryMapper::categoryToResponseCategoryDto);
     }
 
     @Override
     public ResponseCategoryDto create(RequestCategoryDto requestCategoryDto) {
-        return categoryMapper.categoryToDto(categoryRepository.save(categoryMapper.requestCategoryDtoToCategory(requestCategoryDto)));
+        return categoryMapper.categoryToResponseCategoryDto(categoryRepository.save(categoryMapper.requestCategoryDtoToCategory(requestCategoryDto)));
     }
 
     @Override
@@ -48,7 +49,10 @@ public class CategoryServiceImpl implements CategoryService {
             throw new EntityModifyingException("Can not set child category as parent category");
         }
         requestCategoryDto.setId(id);
-        return categoryMapper.categoryToDto(categoryRepository.save(categoryMapper.requestCategoryDtoToCategory(requestCategoryDto)));
+        Category category = categoryMapper.requestCategoryDtoToCategory(requestCategoryDto);
+        ResponseCategoryDto parentCategory = findById(requestCategoryDto.getParentCategoryId());
+        category.setParentCategory(categoryMapper.responseCategoryDtoToCategory(parentCategory));
+        return categoryMapper.categoryToResponseCategoryDto(categoryRepository.save(category));
     }
 
     @Override
