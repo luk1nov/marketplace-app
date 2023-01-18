@@ -1,5 +1,6 @@
 package com.lukyanov.itemservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ public class ResponseProductDto implements Serializable {
     private final String status;
     private final ResponseCategoryDto responseCategoryDto;
     private final String condition;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime created;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime updated;
 }
