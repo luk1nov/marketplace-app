@@ -22,13 +22,13 @@ public class Category {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_category", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parent_category", referencedColumnName = "id", columnDefinition = "integer")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Category parentCategory;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parentCategory")
+    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Category> subcategories;
