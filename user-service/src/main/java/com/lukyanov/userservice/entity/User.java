@@ -1,9 +1,11 @@
-package com.lukyanov.userservice.model;
+package com.lukyanov.userservice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +30,8 @@ public class User {
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column
+    @CreationTimestamp
     private LocalDateTime created;
-    @Column
+    @UpdateTimestamp
     private LocalDateTime updated;
 }

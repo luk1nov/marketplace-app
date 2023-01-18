@@ -7,9 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "product_status")
 public class ProductStatus {
     @Id
@@ -23,4 +22,9 @@ public class ProductStatus {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Product> products = new HashSet<>();
+
+    public ProductStatus(Long id, String status){
+        this.id = id;
+        this.status = status;
+    }
 }
