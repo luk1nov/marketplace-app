@@ -39,18 +39,23 @@ public class Product {
     @EqualsAndHashCode.Exclude
     private Condition condition;
 
-    @Column(name = "seller_id", nullable = false)
+    @Column(name = "seller_id", updatable = false, nullable = false)
     private Long sellerId;
 
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
     private ProductStatus status;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created", updatable = false, nullable = false)
     @CreationTimestamp
     private LocalDateTime created;
 
     @Column(name = "updated", nullable = false)
     @UpdateTimestamp
     private LocalDateTime updated;
+
+    @PreUpdate
+    public void preUpdate(){
+        this.updated = LocalDateTime.now();
+    }
 }
