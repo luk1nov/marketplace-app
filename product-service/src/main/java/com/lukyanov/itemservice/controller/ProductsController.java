@@ -32,12 +32,12 @@ public class ProductsController {
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseProductDto create(@RequestBody RequestProductDto requestProductDto, @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader){
+    public ResponseProductDto create(@RequestBody @Valid RequestProductDto requestProductDto, @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader){
         return productService.create(requestProductDto, authHeader);
     }
 
     @PutMapping("/{id}")
-    public ResponseProductDto update(@RequestBody RequestProductDto requestProductDto, @PathVariable Long id){
+    public ResponseProductDto update(@RequestBody @Valid RequestProductDto requestProductDto, @PathVariable Long id){
         return productService.update(id, requestProductDto);
     }
 
