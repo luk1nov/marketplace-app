@@ -19,8 +19,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -57,11 +59,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ResponseProductDto update(Long id, RequestProductDto requestProductDto) {
         findById(id);
         Product updatedProduct = buildItemFromRequestItem(requestProductDto);
         updatedProduct.setId(id);
-        return productMapper.productToDto(productRepository.save(updatedProduct));
+        return productMapper.productToDto(productRepository.saveAndFlush(updatedProduct));
     }
 
     @Override
@@ -79,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private Product buildItemFromRequestItem(RequestProductDto requestProductDto){
-        ResponseCategoryDto responseCategoryDto = categoryService.findById(requestProductDto.getCategoryId());
+        ResponseCategoryDto responseCategoryDto = Objects.nonNull(requestProductDto.getCategoryId()) ? categoryService.findById(requestProductDto.getCategoryId()) : null;
         ConditionDto conditionDto = conditionService.findByName(requestProductDto.getCondition());
         Product product = productMapper.dtoToProduct(requestProductDto);
         product.setCategory(categoryMapper.responseCategoryDtoToCategory(responseCategoryDto));
